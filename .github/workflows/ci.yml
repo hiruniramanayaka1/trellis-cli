@@ -18,6 +18,11 @@ jobs:
       - uses: actions/setup-go@v7
         with:
           go-version-file: 'go.mod'
+      - name: Cache Go modules
+        uses: actions/cache@v4
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('go.mod', 'go.sum') }}
       - name: Check Go formatting
         run: |
           if [ -n "$(gofmt -s -l .)" ]; then
@@ -34,6 +39,11 @@ jobs:
       - uses: actions/setup-go@v7
         with:
           go-version-file: 'go.mod'
+      - name: Cache Go modules
+        uses: actions/cache@v4
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('go.mod', 'go.sum') }}
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v9
         with:
@@ -48,6 +58,11 @@ jobs:
       - uses: actions/setup-go@v7
         with:
           go-version-file: 'go.mod'
+      - name: Cache Go modules
+        uses: actions/cache@v4
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('go.mod', 'go.sum') }}
       - name: Check for suspicious constructs or opportunities for improvement
         run: go fix -diff ./...
 
@@ -59,6 +74,11 @@ jobs:
       - uses: actions/setup-go@v7
         with:
           go-version-file: 'go.mod'
+      - name: Cache Go modules
+        uses: actions/cache@v4
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('go.mod', 'go.sum') }}
       - name: Check if go.mod/go.sum are tidy
         run: go mod tidy -diff
 
@@ -69,6 +89,11 @@ jobs:
       - uses: actions/setup-go@v7
         with:
           go-version-file: 'go.mod'
+      - name: Cache Go modules
+        uses: actions/cache@v4
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('go.mod', 'go.sum') }}
       - name: Test
         run: go test -v -short ./...
 
